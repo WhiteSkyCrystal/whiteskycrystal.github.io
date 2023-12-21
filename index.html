@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        input {
+            margin-bottom: 10px;
+        }
+
+        #result {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            margin-top: 20px;
+            color: darkgreen; /* Добавим цвет темнозелёный для чисел */
+        }
+
+        #blackcol{
+            color: black;
+            font-size: 18px;
+        }
+        input{
+            padding: 3px 0px;
+        }
+
+        button{
+            padding: 8px 20px;
+        }
+    </style>
+
+    <!-- Добавим ссылку на шрифт Digital-7 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h2>Конвертер цены во время работы</h2>
+
+    <label for="price">Цена товара:</label>
+    <br>
+    <input type="number" id="price" placeholder="Введите цену" type="tel">
+
+    <br>
+
+    <label for="rate">Почасовая ставка:</label>
+    <input type="number" id="rate" placeholder="Введите почасовую ставку" value="27.7" type="tel">
+
+    <br>
+
+    <button onclick="convert()">Конвертировать</button>
+
+    <br>
+    <div id="result"></div>
+
+    <script>
+        function convert() {
+            var price = parseFloat(document.getElementById('price').value);
+            var rate = parseFloat(document.getElementById('rate').value);
+
+            if (isNaN(price) || isNaN(rate)) {
+                alert('Пожалуйста, введите корректные числовые значения.');
+                return;
+            }
+
+            var hours = price / rate;
+            var minutes = hours * 60;
+            var days = hours / 8;
+
+            var result = `<div id="result"><span id="blackcol">ДНИ</span>
+                <br><span style="color: darkgreen;">${days.toFixed(2)}</span>
+                <br><br><span id="blackcol">ЧАСЫ</span><br><span style="color: darkgreen;">${hours.toFixed(2)}</span>
+                <br><br><span id="blackcol">МИНУТЫ</span><br><span style="color: darkgreen;">${minutes.toFixed(2)}</span></div>`;
+
+            document.getElementById('result').innerHTML = result;
+        }
+    </script>
+</body>
+</html>
